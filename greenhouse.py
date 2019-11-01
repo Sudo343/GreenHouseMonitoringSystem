@@ -23,11 +23,11 @@ def fetchNuploadDat():
     
     while True:
         h, t = Adafruit_DHT.read_retry(sensor_name, dht_pin)
-        #s = (1-analog_0.read())*100
+        #s = (1-analog_0.read())*100  # comment out when arduino is working
         print(h)
         print(t)
-        #print(s)
-        params = urllib.urlencode({'field1':h,'field2':t,'key':key})
+        #print(s)   # comment out when arduino is working
+        params = urllib.urlencode({'field1':h,'field2':t,'key':key})  #  add " 'field3':s, "when comment out when arduino is working
         headers = {"Content-typZZe":"application/x-www-form-urlencoded","Accept":"text/plain"}
         conn=httplib.HTTPConnection("api.thingspeak.com:80")
         #try:

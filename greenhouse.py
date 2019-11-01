@@ -27,7 +27,7 @@ def fetchNuploadDat():
         print(h)
         print(t)
         print(s)   # comment out when arduino is working
-        params = urllib.urlencode({'field1':h,'field2':t,'field3':s,'key':key})  #  add " 'field3':s, "when comment out when arduino is working
+        params = urllib.urlencode({'field1':h,'field2':t,'field3':s,'key':key})  
         headers = {"Content-typZZe":"application/x-www-form-urlencoded","Accept":"text/plain"}
         conn=httplib.HTTPConnection("api.thingspeak.com:80")
         try:
@@ -37,8 +37,8 @@ def fetchNuploadDat():
             data = response.read()
             conn.close()
             time.sleep(1)
-        except:                        # comment out when arduino is working
-            print "connection failed"  # comment out when arduino is working
+        except:                        
+            print "connection failed"  
         break
 if __name__ == "__main__":
     while True:

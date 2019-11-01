@@ -16,7 +16,7 @@ it = pyfirmata.util.Iterator(board)
 it.start()
 analog_0 = board.get_pin('a:0:i')
 time.sleep(.1)
-baseURL = 'https://api.thingspeak.com/update?api_key=%s' % key
+baseURL = 'https://api.thingspeak.com/update?api_key=48PW4P20I7YCZREZ' 
 
 def fetchNuploadDat():
     
@@ -24,8 +24,9 @@ def fetchNuploadDat():
         h, t = Adafruit_DHT.read_retry(sensor_name, dht_pin)
         s = (1-analog_0.read())*100
         try:
-            f = urllib2.urlopen(baseURL +"&field1=%s&field2=%s&field3=%s" % (str(h), str(t),str(s)))
-            print f.read()
+            f = urllib2.urlopen(baseURL +"&field1=%s" % (str(h)))
+            f = urllib2.urlopen(baseURL +"&field2=%s" % (str(t)))
+            f = urllib2.urlopen(baseURL +"&field3=%s" % (str(s)))
             f.close()
             sleep(1)
         except:

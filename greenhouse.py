@@ -38,8 +38,8 @@ def fetchNuploadDat():
         data = response.read()
         conn.close()
         time.sleep(1)
-      #  except:
-      #      print "connection failed"
+      #  except:                        # comment out when arduino is working
+      #      print "connection failed"  # comment out when arduino is working
        # break
 if __name__ == "__main__":
     while True:

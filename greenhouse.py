@@ -23,24 +23,23 @@ def fetchNuploadDat():
     
     while True:
         h, t = Adafruit_DHT.read_retry(sensor_name, dht_pin)
-        #s = (1-analog_0.read())*100  # comment out when arduino is working
+        s = (1-analog_0.read())*100  # comment out when arduino is working
         print(h)
         print(t)
-        #print(s)   # comment out when arduino is working
-        params = urllib.urlencode({'field1':h,'field2':t,'key':key})  #  add " 'field3':s, "when comment out when arduino is working
+        print(s)   # comment out when arduino is working
+        params = urllib.urlencode({'field1':h,'field2':t,'field3':s,'key':key})  #  add " 'field3':s, "when comment out when arduino is working
         headers = {"Content-typZZe":"application/x-www-form-urlencoded","Accept":"text/plain"}
         conn=httplib.HTTPConnection("api.thingspeak.com:80")
-        #try:
-        conn.request("POST","/update",params,headers)
-        response = conn.getresponse()
-        print(h,t)
-        print(response.status,response.reason)
-        data = response.read()
-        conn.close()
-        time.sleep(1)
-      #  except:                        # comment out when arduino is working
-      #      print "connection failed"  # comment out when arduino is working
-       # break
+        try:
+            conn.request("POST","/update",params,headers)
+            response = conn.getresponse()
+            print(response.status,response.reason)
+            data = response.read()
+            conn.close()
+            time.sleep(1)
+        except:                        # comment out when arduino is working
+            print "connection failed"  # comment out when arduino is working
+        break
 if __name__ == "__main__":
     while True:
         fetchNuploadDat()

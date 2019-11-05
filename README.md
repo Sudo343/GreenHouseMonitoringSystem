@@ -3,9 +3,9 @@
 This project contains a IOT and Machine Learning based project which predicts diseases a plant is affected from.
 
 1. Following Parameters are visualized on thingspeak
-    Humidity
-    Temperature
-    Soil moisture
+    1. Humidity
+    2. Temperature
+    3. Soil moisture
 
 2. This Codebase contains following scripts/programs
     1. Arduino side code

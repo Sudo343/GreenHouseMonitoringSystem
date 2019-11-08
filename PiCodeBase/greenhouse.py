@@ -47,4 +47,4 @@ if __name__ == "__main__":
     while True:
         fetchNuploadDat()
         # free account has an api limit of 15sec
-        time.sleep(1)
+        time.sleep(600)

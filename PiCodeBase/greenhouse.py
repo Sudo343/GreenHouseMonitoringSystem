@@ -15,7 +15,8 @@ sensor_name= Adafruit_DHT.DHT11
 board = pyfirmata.Arduino('/dev/ttyACM0')
 it = pyfirmata.util.Iterator(board)
 it.start()
-analog_0 = board.get_pin('a:0:i')
+analog_0 = board.get_pin('a:0:i')   # soilmoisture sensor
+analog_1 = board.get_pin('a:1:i')    # light dependent resistor
 time.sleep(.1)
 baseURL = 'https://api.thingspeak.com/update?api_key=48PW4P2OI7YCZREZ' 
 
@@ -23,11 +24,13 @@ def fetchNuploadDat():
     
     while True:
         h, t = Adafruit_DHT.read_retry(sensor_name, dht_pin)
-        s = (1-analog_0.read())*100  # comment out when arduino is working
+        s = (1-analog_0.read())*100  # 
+        l = (1-analog_1.read())*100  # needs calibration
         print(h)
         print(t)
-        print(s)   # comment out when arduino is working
-        params = urllib.urlencode({'field1':h,'field2':t,'field3':s,'key':key})  
+        print(s)   # 
+        print(l)
+        params = urllib.urlencode({'field1':h,'field2':t,'field3':s,'field4':l,'key':key})  
         headers = {"Content-typZZe":"application/x-www-form-urlencoded","Accept":"text/plain"}
         conn=httplib.HTTPConnection("api.thingspeak.com:80")
         try:

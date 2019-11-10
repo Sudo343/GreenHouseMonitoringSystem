@@ -4,6 +4,8 @@ import cv2
 from keras.preprocessing.image import img_to_array
 import numpy as np
 import json
+import base64
+import re
 
 maps = ['Pepper__bell___Bacterial_spot','Pepper__bell___healthy','Potato___Early_blight', 'Potato___Late_blight',
         'Potato___healthy', 'Tomato_Bacterial_spot', 'Tomato_Early_blight', 'Tomato_Late_blight','Tomato_Leaf_Mold', 
@@ -29,9 +31,15 @@ class prediction():
             return img_to_array(image)
         else:
             return np.array([])
+
+    def parseImage(self,imgData):
+        imgstr = re.search(b'base64,(.*)', imgData).group(1)
+        with open('output.png','wb') as output:
+            output.write(base64.decodebytes(imgstr))
         
-    def predict(self, image_dir):
-        image = self.convert_image_to_array(image_dir)/255.0
+    def predict(self, imgData):
+        imgData = self.parseImage(imgData)
+        image = self.convert_image_to_array("output.png")/255.0
         image = np.expand_dims(image, axis=0)
         
         result = self.model.predict(image)
@@ -40,9 +48,11 @@ class prediction():
         return json.dumps(maps[result[0]])
 
 
-image_dir = "test_images/papper_bell_healthy.JPG"
 
-obj = prediction()
-print(obj.predict(image_dir))
+
+#imageData = "#############"
+
+#obj = prediction()
+#print(obj.predict(imageData))
 
 

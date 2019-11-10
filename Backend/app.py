@@ -1,10 +1,10 @@
 #!venv-flask/bin/python
 #!venv-flask/bin/flask
-from flask import Flask, jsonify
-from flask import make_response
-from flask import request
+from flask import Flask, jsonify, make_response, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 evaluationResult =  { "details" : "Pepper__bell_Bacterial_spot" }
 
@@ -32,7 +32,7 @@ def notFound(error):
 
 @app.errorhandler(500)
 def internalServerError(error):
-    return make_response(jsonify({'error': 'Something went wrong with server'}), 500)
+    return make_response(jsonify({'error': ('Something went wrong with server' + error)}), 500)
 
 if __name__ == '__main__':
     app.run(debug=True)

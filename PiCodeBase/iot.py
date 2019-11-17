@@ -14,7 +14,7 @@ print(my_string)
 
 endPoint = "https://green-house-monitor.herokuapp.com/evaluate"
 
-requestBody = { 'payload': mystring}
+requestBody = { 'payload': str(mystring)}
 
 requestHeaders = {'Content-Type': 'application/json'}
 

@@ -24,8 +24,8 @@ class prediction():
         self.model.load_weights("model.h5")
         
         
-    def convert_image_to_array(self,image_dir):
-        image = cv2.imread(image_dir)
+    def convert_image_to_array(self,image):
+        #image = cv2.imread(image_dir)
         if image is not None:
             image = cv2.resize(image, (256,256))   
             return img_to_array(image)
@@ -38,8 +38,8 @@ class prediction():
             output.write(base64.decodebytes(imgstr))
         
     def predict(self, imgData):
-        imgData = self.parseImage(imgData)
-        image = self.convert_image_to_array("output.png")/255.0
+        #imgData = self.parseImage(imgData)
+        image = self.convert_image_to_array(imgData)/255.0
         image = np.expand_dims(image, axis=0)
         
         result = self.model.predict(image)
